@@ -33,8 +33,8 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
         Connect Wallet
       </button>
       <span className="text-center">
-        You are not connected yet, click the above button and connect your
-        wallet with Sepolia test-net.
+        Please connect your wallet to the Sepolia test-net by clicking the
+        button above. You are not yet connected.
       </span>
     </div>
   );
