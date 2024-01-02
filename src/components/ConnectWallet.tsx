@@ -1,26 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { connectWallet } from "../services/connection";
+import { EtherContext } from "@app/context/EtherContext";
 
 export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
-  const [account, setAccount] = useState(false);
+  const { account } = useContext(EtherContext);
 
   const handleConnectWallet = async () => {
-    const account = await connectWallet();
-    setAccount(!!account);
+    await connectWallet();
   };
-
-  useEffect(() => {
-    const disconnected = (accounts: Array<string>) => {
-      if (!accounts.length) setAccount(() => false);
-    };
-    window.ethereum.on("accountsChanged", disconnected);
-
-    return () => {
-      window.ethereum.removeAllListeners("accountsChanged");
-    };
-  }, []);
 
   return account ? (
     <>{children}</>

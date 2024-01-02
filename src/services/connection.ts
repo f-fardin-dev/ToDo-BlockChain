@@ -1,10 +1,10 @@
-export const connectWallet = async () => {
+export const connectWallet = async (): Promise<boolean | string> => {
   try {
-    const { ethereum } = window;
-    if (!ethereum) {
+    if (typeof window === undefined || !window?.ethereum) {
       console.error("Metamask not detected!");
       return false;
     }
+    const { ethereum } = window;
     const chainId = await ethereum.request({ method: "eth_chainId" });
     if (chainId !== "0xaa36a7") {
       alert("Your are not connecting with Sepolia network!");
