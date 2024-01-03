@@ -14,9 +14,9 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
   return account ? (
     <>{children}</>
   ) : (
-    <div className="flex flex-col gap-6 justify-center items-center">
+    <div className="flex flex-col gap-6 justify-center items-center my-auto">
       <button
-        className="bg-orange-600 p-2 rounded-md"
+        className="bg-orange-600 p-2 rounded-md hover:scale-105 active:scale-100"
         onClick={handleConnectWallet}
       >
         Connect Wallet

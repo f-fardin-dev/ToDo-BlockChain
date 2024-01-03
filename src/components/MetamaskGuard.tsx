@@ -8,6 +8,6 @@ export const MetamaskGuard = ({ children }: { children: React.ReactNode }) => {
   return isMetamaskAvailable ? (
     <>{children}</>
   ) : (
-    <span>Metamask is not installed!</span>
+    <span className="my-auto">Metamask is not installed!</span>
   );
 };
