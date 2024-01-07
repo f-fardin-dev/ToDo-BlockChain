@@ -21,7 +21,7 @@ export const AddTask = () => {
   };
 
   return (
-    <div className="flex flex-row gap-4 p-2 w-full md:max-w-3xl ">
+    <div className="flex flex-col sm:flex-row gap-4 w-full">
       <input
         ref={inputRef}
         className="text-black p-2 rounded-md grow"
@@ -30,8 +30,8 @@ export const AddTask = () => {
       />
       <button
         onClick={handleAddTask}
-        className="bg-blue-500 rounded-md p-2 flex items-center hover:scale-105 active:scale-100 
-        disabled:scale-100 disabled:bg-blue-300 disabled:shadow-none"
+        className="bg-blue-500 rounded-md p-2 flex items-center hover:bg-blue-600 active:bg-blue-500
+        disabled:bg-blue-300 disabled:shadow-none justify-center transition-colors"
         disabled={loading}
       >
         {loading && (
@@ -47,7 +47,7 @@ export const AddTask = () => {
               cy="12"
               r="10"
               stroke="currentColor"
-              stroke-width="4"
+              strokeWidth="4"
             ></circle>
             <path
               className="opacity-75"
