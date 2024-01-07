@@ -2,7 +2,7 @@
 
 import { addTask } from "@app/services/connection";
 import { useRef, useState } from "react";
-import { Loader } from "./Loader";
+import { Loader } from "./Icons";
 
 export const AddTask = () => {
   const inputRef = useRef<HTMLInputElement>(null);
