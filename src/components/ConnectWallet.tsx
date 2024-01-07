@@ -12,7 +12,7 @@ export const ConnectWallet = ({ children }: { children: React.ReactNode }) => {
   };
 
   return account ? (
-    <>{children}</>
+    <div className="p-2 w-full md:max-w-3xl">{children}</div>
   ) : (
     <div className="flex flex-col gap-6 justify-center items-center my-auto">
       <button
