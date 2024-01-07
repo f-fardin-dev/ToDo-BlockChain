@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import abi from "../../blockChain/abi.json";
+import { Task } from "@app/types/task-interface";
 
 export const connectWallet = async (): Promise<boolean | string> => {
   try {
@@ -25,30 +26,53 @@ export const connectWallet = async (): Promise<boolean | string> => {
   }
 };
 
+const getContract = async () => {
+  if (typeof window === undefined || !window?.ethereum) {
+    console.error("Metamask not detected!");
+    return false;
+  }
+
+  const provider = new ethers.BrowserProvider(window.ethereum);
+  const signer = await provider.getSigner();
+  return new ethers.Contract(
+    "0xfd3AE9a46812A22dbD6Ad96eb1107bEc69632476",
+    abi,
+    signer
+  );
+};
+
 export const addTask = async (title: string): Promise<boolean> => {
   try {
-    if (typeof window === undefined || !window?.ethereum) {
-      console.error("Metamask not detected!");
+    const taskContract = await getContract();
+    if (!taskContract) {
       return false;
     }
+    await taskContract.addTask(title);
+    return true;
+  } catch (error) {
+    console.error((error as Record<string, string>).message);
+    return false;
+  }
+};
 
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
-    const TaskContract = new ethers.Contract(
-      "0x0C1e4f8a508a1bD78DBb35b3713BFeB7D83a343f",
-      abi,
-      signer
-    );
+export const getAllTask = async (): Promise<Task[]> => {
+  try {
+    const taskContract = await getContract();
 
-    await TaskContract.addTask(title);
+    if (!taskContract) {
+      return [];
+    }
+
+    const tasks: Task[] = await taskContract.getMyTasks();
+    console.log(tasks);
 
     // TaskContract.on("taskAdded", (recipient, taskId, event) => {
     //   console.log("taskAdded event:", recipient, taskId, event);
     //   // Handle the event data here
     // });
-    return true;
+    return tasks;
   } catch (error) {
     console.error((error as Record<string, string>).message);
-    return false;
+    return [];
   }
 };
