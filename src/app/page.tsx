@@ -4,6 +4,7 @@ import { EtherContextProvider } from "@app/context/EtherContext";
 import { ConnectWallet } from "../components/ConnectWallet";
 import { MetamaskGuard } from "../components/MetamaskGuard";
 import { AddTask } from "@app/components/AddTask";
+import { TaskList } from "@app/components/TaskList";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <MetamaskGuard>
           <ConnectWallet>
             <AddTask />
+            <TaskList />
           </ConnectWallet>
         </MetamaskGuard>
       </EtherContextProvider>
