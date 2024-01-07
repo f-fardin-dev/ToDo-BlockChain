@@ -26,7 +26,7 @@ export const connectWallet = async (): Promise<boolean | string> => {
   }
 };
 
-const getContract = async () => {
+export const getContract = async () => {
   if (typeof window === undefined || !window?.ethereum) {
     console.error("Metamask not detected!");
     return false;
@@ -64,12 +64,7 @@ export const getAllTask = async (): Promise<Task[]> => {
     }
 
     const tasks: Task[] = await taskContract.getMyTasks();
-    console.log(tasks);
 
-    // TaskContract.on("taskAdded", (recipient, taskId, event) => {
-    //   console.log("taskAdded event:", recipient, taskId, event);
-    //   // Handle the event data here
-    // });
     return tasks;
   } catch (error) {
     console.error((error as Record<string, string>).message);
